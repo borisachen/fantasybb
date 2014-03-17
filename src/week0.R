@@ -3,8 +3,7 @@ library(mclust)
 library(ggplot2) 
 
 thisweek = 0
-download = T
-useold = FALSE
+download = TRUE
 
 ### make sure input / output directories exist
 
@@ -16,8 +15,7 @@ outputdir = paste("~/projects/fantasybb/out/week", thisweek, "/", sep=""); mkdir
 
 pos.list = c('hitters', 'pitchers', '1b', '2b', '3b', 
              'ss', 'c', 'of', 'dh', 'sp', 'rp', 'overall')
-#pos.list = c('overall')
-#pos.list = c(  'ros-qb','ros-rb','ros-wr','ros-te','ros-k', 'ros-dst')
+             
 if (download == TRUE) {
   for (mp in pos.list) {
     curlstr = paste('curl http://www.fantasypros.com/mlb/rankings/',mp,
@@ -108,7 +106,7 @@ draw.tiers <- function(pos, low, high, k) {
   error.bar.plot(low = low, high = high, k=k, tpos=tpos, dat=dat)
 }
 
-#injured <- c('Alex Rodriguez')
+### if there are any injured playes to remove, list them here
 injured <- c('')
 
 draw.tiers("overall", 1, 50, 10)
